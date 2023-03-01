@@ -225,7 +225,7 @@ botSD = Client(
 def draw(client, message):
     msgs = message.text.split(' ', 1)
     if len(msgs) == 1:
-        message.reply_text("Format : /draw < text to anime image >")
+        message.reply_text("Format : /draw < text to image >")
         return
     msg = msgs[1]
 
@@ -299,7 +299,7 @@ def draw(client, message):
 
 @botSD.on_message(filters.command(["start"], prefixes=["/", "!"]))
 async def start(client, message):
-    Photo = "https://media.discordapp.net/attachments/1028156834944655380/1062018608022171788/3aac7aaf-0065-40aa-9e4d-430c717b3d87.jpg"
+    Photo = ""
 
     buttons = [[
         InlineKeyboardButton("Add to your group",
@@ -308,7 +308,7 @@ async def start(client, message):
     await message.reply_photo(
         photo=Photo,
         caption=
-        f"Hello! I'm botname Ai and I can make an anime-styled picture!\n\n/draw text to anime image",
+        f"Hello! I'm botname Ai and I can make pictures!\n\n/draw text to image",
         reply_markup=InlineKeyboardMarkup(buttons))
 
 
