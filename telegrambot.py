@@ -3,18 +3,31 @@ import requests
 import json
 import os
 import io
-from PIL import Image
-from pathlib import Path
 import re
 import base64
+import random
+from PIL import Image
+from pathlib import Path
 from dotenv import load_dotenv
 from telegram.ext import CommandHandler, Updater, MessageHandler, Filters
 from telegram import Bot, InputFile
+from pyrogram import Client, filters
+from pyrogram.types import *
+from dotenv import load_dotenv
+from PIL import Image, PngImagePlugin
+
+
+
+
 
 load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 ENDPOINT = os.getenv("ENDPOINT")
 PERIOD_IGNORE = os.getenv("PERIOD_IGNORE")
+API_ID = os.getenv("API_ID")
+API_HASH = os.getenv("API_HASH")
+SD_URL = os.getenv("SD_URL")
+
 
 
 
@@ -152,6 +165,16 @@ conversation_history = f"{char_name}'s Persona: {data['char_persona']}\n" + \
 
 ######
 
+
+
+
+
+
+
+
+
+
+
 # Define the function to handle incoming messages
 def handle_message(update, context):
     global conversation_history
@@ -186,5 +209,112 @@ dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_me
 # Start the bot
 updater.start_polling()
 
+
+
+
+################# GENERATE IMAGES FROM STABLE DIFFUSION API #################
+
+botSD = Client(
+    "stable",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=TELEGRAM_BOT_TOKEN
+)
+
+@botSD.on_message(filters.command(["draw"]))
+def draw(client, message):
+    msgs = message.text.split(' ', 1)
+    if len(msgs) == 1:
+        message.reply_text("Format : /draw < text to anime image >")
+        return
+    msg = msgs[1]
+
+    K = message.reply_text("Please Wait 10-15 Second")
+
+    payload = {
+        "prompt": msg,
+        "steps": 50,
+        "batch_size": 1,
+        "n_iter": 1,
+        "cfg scale": 7,
+        "width": 360,
+        "height": 640,
+       # "enable_hr': false,
+       # "denoising_strength": 0,
+       # "firstphase_width": 0,
+       # "firstphase_height": 0,
+       # "styles": [
+       #     "string"
+       # ],
+        "seed": -1,
+        "subseed": -1,
+        "subseed_strength": 0,
+        "seed_resize_from_h": -1,
+        "seed_resize_from_w": -1,
+        "restore_faces": True,
+        "tiling": False,
+        "negative prompt": "Out of frame, out of focus, morphed",
+        "s_churn": 0,
+        "s_tmax": 0,
+        "s_tmin": 0,
+        "s_noise": 1,
+        "sampler_index": "DPM++ 2M Karras"
+}
+
+    r = requests.post(url=f'{SD_URL}/sdapi/v1/txt2img', json=payload).json()
+
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    chars1 = "1234564890"
+    gen1 = random.choice(chars)
+    gen2 = random.choice(chars)
+    gen3 = random.choice(chars1)
+    gen4 = random.choice(chars)
+    gen5 = random.choice(chars)
+    gen6 = random.choice(chars)
+    gen7 = random.choice(chars1)
+    gen8 = random.choice(chars)
+    gen9 = random.choice(chars)
+    gen10 = random.choice(chars1)
+    word = f"{message.from_user.id}-MOE{gen1}{gen2}{gen3}{gen4}{gen5}{gen6}{gen7}{gen8}{gen9}{gen10}"
+
+    for i in r['images']:
+        image = Image.open(io.BytesIO(base64.b64decode(i.split(",", 1)[0])))
+
+        png_payload = {"image": "data:image/png;base64," + i}
+        response2 = requests.post(url=f'{SD_URL}/sdapi/v1/png-info',
+                                  json=png_payload)
+
+        pnginfo = PngImagePlugin.PngInfo()
+        pnginfo.add_text("parameters", response2.json().get("info"))
+        image.save(f'{word}.png', pnginfo=pnginfo)
+
+        message.reply_photo(
+            photo=f"{word}.png",
+            caption=
+            f"Prompt - **{msg}**\n **[{message.from_user.first_name}-Kun](tg://user?id={message.from_user.id})**\n"
+        )
+        os.remove(f"{word}.png")
+        K.delete()
+
+
+@botSD.on_message(filters.command(["start"], prefixes=["/", "!"]))
+async def start(client, message):
+    Photo = "https://media.discordapp.net/attachments/1028156834944655380/1062018608022171788/3aac7aaf-0065-40aa-9e4d-430c717b3d87.jpg"
+
+    buttons = [[
+        InlineKeyboardButton("Add to your group",
+                             url="http://t.me/botname?startgroup=true"),
+    ]]
+    await message.reply_photo(
+        photo=Photo,
+        caption=
+        f"Hello! I'm botname Ai and I can make an anime-styled picture!\n\n/draw text to anime image",
+        reply_markup=InlineKeyboardMarkup(buttons))
+
+
+botSD.run()
+
+
+###############################
 
 
