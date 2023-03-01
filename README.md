@@ -16,6 +16,9 @@ This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B wi
 
 ![Choose](https://i.imgur.com/qY6ZpB8.png)
 
+# Image Generation:
+Currently, to get an image to generate you must send "/draw [your prompt here]"
+example: "/draw A Penguin in Las Vegas playing slots"
 
 [Get more Characters](https://booru.plus/+pygmalion)
 # More Info: 
@@ -30,6 +33,7 @@ SD_URL: your sd api url ( 128.0.0.1:7860 if running locally)
 
 When you start automatic1111's stable diffusion webui, add the flag --api and --medvram to enable the api and help with having both models loaded on your PC.
 I was able to generate images with 2048 context tokens saved in Pygmalion 6b with a 16gb AMD RX 6800xt.
+
 
 
 
