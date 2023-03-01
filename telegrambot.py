@@ -115,17 +115,15 @@ data = characters[selected_char]
 # Get the character name, greeting, and image
 char_name2 = data["char_name2"]
 char_greeting = data["char_greeting"]
-char_dialogue = data["char_greeting"]
+#char_dialogue = data["char_greeting"]
 char_image = data.get("char_image")
-print("Starting up " + char_name2)
+print("Loaded up " + char_name2)
 num_lines_to_keep = 20
 updater = Updater(token=TELEGRAM_BOT_TOKEN, use_context=True)
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 global conversation_history
 conversation_history = f"{char_name2}'s Persona: {data['char_persona']}\n" + \
                             f"World Scenario: {data['world_scenario']}\n" + \
-                            f'<START>\n' + \
-                            f'{char_dialogue}' + \
                             f'<START>\n' + \
                             f'f"{char_name2}: {char_greeting}\n'
 
