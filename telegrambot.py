@@ -24,10 +24,10 @@ def split_text(text):
 def upload_character(json_file, img, tavern=False):
     json_file = json_file if type(json_file) == str else json_file.decode('utf-8')
     data = json.loads(json_file)
-    outfile_name = data["char_name2"]
+    outfile_name = data["char_name"]
     i = 1
     while Path(f'Characters/{outfile_name}.json').exists():
-        outfile_name = f'{data["char_name2"]}_{i:03d}'
+        outfile_name = f'{data["char_name"]}_{i:03d}'
         i += 1
     if tavern:
         outfile_name = f'TavernAI-{outfile_name}'
@@ -44,14 +44,14 @@ def upload_tavern_character(img, name1, name2):
     _img.getexif()
     decoded_string = base64.b64decode(_img.info['chara'])
     _json = json.loads(decoded_string)
-    _json = {"char_name2": _json['name'], "char_persona": _json['description'], "char_greeting": _json["first_mes"], "example_dialogue": _json['mes_example'], "world_scenario": _json['scenario']}
-    _json['example_dialogue'] = _json['example_dialogue'].replace('{{user}}', name1).replace('{{char}}', _json['char_name2'])
+    _json = {"char_name": _json['name'], "char_persona": _json['description'], "char_greeting": _json["first_mes"], "example_dialogue": _json['mes_example'], "world_scenario": _json['scenario']}
+    _json['example_dialogue'] = _json['example_dialogue'].replace('{{user}}', name1).replace('{{char}}', _json['char_name'])
     return upload_character(json.dumps(_json), img, tavern=True)
 
 
 def get_prompt(conversation_history, user, text):
     return {
-        "prompt": conversation_history + f"{user}: {text}\n{char_name2}:",
+        "prompt": conversation_history + f"{user}: {text}\n{char_name}:",
         "use_story": False,
         "use_memory": False,
         "use_authors_note": False,
@@ -109,23 +109,23 @@ for filename in os.listdir(characters_folder):
 
 # Print a list of characters and let the user choose one
 for i, character in enumerate(characters):
-    print(f"{i+1}. {character['char_name2']}")
+    print(f"{i+1}. {character['char_name']}")
 selected_char = int(input("Please select a character: ")) - 1
 data = characters[selected_char]
 # Get the character name, greeting, and image
-char_name2 = data["char_name2"]
+char_name = data["char_name"]
 char_greeting = data["char_greeting"]
 #char_dialogue = data["char_greeting"]
 char_image = data.get("char_image")
-print("Loaded up " + char_name2)
+print("Loaded up " + char_name)
 num_lines_to_keep = 20
 updater = Updater(token=TELEGRAM_BOT_TOKEN, use_context=True)
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 global conversation_history
-conversation_history = f"{char_name2}'s Persona: {data['char_persona']}\n" + \
+conversation_history = f"{char_name}'s Persona: {data['char_persona']}\n" + \
                             f"World Scenario: {data['world_scenario']}\n" + \
                             f'<START>\n' + \
-                            f'f"{char_name2}: {char_greeting}\n'
+                            f'f"{char_name}: {char_greeting}\n'
 
 # SET BOT PROFILE PIC
 
@@ -146,7 +146,7 @@ conversation_history = f"{char_name2}'s Persona: {data['char_persona']}\n" + \
 #    print("Profile photo not found.")
 
 # Set the Botname via the "@BotFather" account
-#bot.send_message(chat_id='93372553', text='/setname' + char_name2)
+#bot.send_message(chat_id='93372553', text='/setname' + char_name)
 
 #---Telegram blocks Bot to Bot Messages, making this code not work---#
 
@@ -172,7 +172,7 @@ def handle_message(update, context):
 
         # Update the conversation history with the user message and bot response
         
-        conversation_history += f"{update.message.from_user.first_name}: {user_message}\n{char_name2}: {response_text}\n"
+        conversation_history += f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}\n"
 
         # Send the response back to the user
         context.bot.send_message(chat_id=update.effective_chat.id, text=response_text)
