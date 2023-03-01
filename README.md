@@ -1,5 +1,5 @@
 # KoboldAI Integrated Telegram Chatbot
-This is a Telgram bot that uses KoboldAI to host models such as Pygmalion-6B with a KoboldAI url. The bot supports json files and tavern cards but will not change its name and image automatically due to Telegram's bot-bot restrictions. 
+This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B with a KoboldAI url. The bot supports json files and tavern cards but will not change its name and image automatically due to Telegram's bot-bot restrictions. 
 
 
 
