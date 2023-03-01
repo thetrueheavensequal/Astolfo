@@ -1,7 +1,9 @@
 # KoboldAI Integrated Telegram Chatbot
 This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B with a KoboldAI url. It can also generate and send images using Stable Diffusion locally or remote. The bot supports json files and tavern cards but will not change its name and image automatically due to Telegram's bot-bot restrictions. 
 
-![Screenshot from 2023-02-28 21-58-50 (1)](https://user-images.githubusercontent.com/80486540/222042223-ee874981-b43c-44f5-825b-164459e8403b.jpg)
+
+
+![Screenshot from 2023-03-01 04-28-12 (1) (1)](https://user-images.githubusercontent.com/80486540/222113587-6b7a70bf-11fa-4ca4-b08c-3da58e8d5a33.jpg)
 
 
 
