@@ -18,6 +18,7 @@ This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B wi
 
 # Image Generation:
 Currently, to get an image to generate you must send "/draw [your prompt here]"
+
 example: "/draw A Penguin in Las Vegas playing slots"
 
 [Get more Characters](https://booru.plus/+pygmalion)
