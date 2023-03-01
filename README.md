@@ -43,11 +43,15 @@ TELEGRAM_BOT_TOKEN: You can get this from creating a bot in Telegram via the @Bo
 ENDPOINT: Set the endpoint variable with the KoboldAI url you get from KoboldAI. If you're running locally, by default the endpoint is http://localhost:5000 This can either be from a locally ran instance, or a remote instance like google colab 
 
 API_ID: your telegram id api id (Get these by creating an app here after creating the bot: https://my.telegram.org/apps)
+
 API_HASH: your telegram id api hash
+
 SD_URL: your sd api url ( 128.0.0.1:7860 if running locally)
 
 Automatic Pygmalion-6B KoboldAi: https://colab.research.google.com/drive/1ZvYq4GmjfsyIkcTQcrBhSFXs8vQLLMAS
+
 Original KoboldAI Colab: https://colab.research.google.com/github/KoboldAI/KoboldAI-Client/blob/main/colab/GPU.ipynb
+
 Fast-stable-diffusion Notebook, AUTOMATIC1111 + DreamBooth: https://colab.research.google.com/github/TheLastBen/fast-stable-diffusion/blob/main/fast_stable_diffusion_AUTOMATIC1111.ipynb
 
 I was able to generate images with 2048 context tokens saved in Pygmalion 6b with a 16gb AMD RX 6800xt
