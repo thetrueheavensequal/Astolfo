@@ -21,4 +21,4 @@ pip install -r requirements.txt
 
 # run the python code
 echo "Starting the bot..."
-python discordbot.py
+python telegrambot.py
