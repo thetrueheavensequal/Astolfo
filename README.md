@@ -1,31 +1,33 @@
-# Discord Tavern Style Pygmalion Chatbot
-This is a discord bot that uses Pygmalion-6B and a KoboldAI url. The bot now supports json files and tavern cards and will change its name and image automatically. I plan on adding more features like group chat support, random messages, and the ability to comment on images you share.
+# KoboldAI Integrated Telegram Chatbot
+This is a Telgram bot that uses KoboldAI to host models such as Pygmalion-6B with a KoboldAI url. The bot supports json files and tavern cards but will not change its name and image automatically due to Telegram's bot-bot restrictions. 
 
-![Preview](https://i.imgur.com/XcIDQ3V.png)
+
 
 
 # Instructions: 
 >1. Clone the repo.
 
->2. Change the variables in the sample.env file and save it as .env in the same folder
+>2. Change the variables in the sample.env file then rename it to only ".env" in the same folder. This sets environment variables
 
->3. Run the bat file
+>3. Run the bat or shell file
 
 >4. Choose the character
 
 ![Choose](https://i.imgur.com/qY6ZpB8.png)
 
-Discord only allows bots to be renamed twice per hour.
 
 [Get more Characters](https://booru.plus/+pygmalion)
 # More Info: 
 
-DISORD_BOT_TOKEN: You can get this from the discord developers portal. [Guide for setting that up](https://rentry.org/discordbotguide)
+TELEGRAM_BOT_TOKEN: You can get this from creating a bot in Telegram via the @BotFather. [Guide for setting that up](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0#create-a-new-telegram-bot-with-botfather)
 
-ENDPOINT: Set the endpoint variable with the KoboldAI url you get from this [google collab](https://colab.research.google.com/drive/1ZvYq4GmjfsyIkcTQcrBhSFXs8vQLLMAS).
+ENDPOINT: Set the endpoint variable with the KoboldAI url you get from KoboldAI. This can either be from a locally ran instance, or a remote instance like [google collab](https://colab.research.google.com/drive/1ZvYq4GmjfsyIkcTQcrBhSFXs8vQLLMAS).
 
 Look for this url in the google collab output:
 
 ![url example](https://raytracing-benchmarks.are-really.cool/5utGhMj.png)
+
+
+If you're running locally, by default the endpoint is http://localhost:5000
 
 
