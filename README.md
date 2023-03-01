@@ -20,7 +20,7 @@ This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B wi
 [Get more Characters](https://booru.plus/+pygmalion)
 # More Info: 
 
-TELEGRAM_BOT_TOKEN: You can get this from creating a bot in Telegram via the @BotFather. [Guide for setting that up](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0#create-a-new-telegram-bot-with-botfather)
+TELEGRAM_BOT_TOKEN: You can get this from creating a bot in Telegram via the @BotFather. Guide for setting that up: https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0#create-a-new-telegram-bot-with-botfather
 
 ENDPOINT: Set the endpoint variable with the KoboldAI url you get from KoboldAI. This can either be from a locally ran instance, or a remote instance like [google collab](https://colab.research.google.com/drive/1ZvYq4GmjfsyIkcTQcrBhSFXs8vQLLMAS).
 
