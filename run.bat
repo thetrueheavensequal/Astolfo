@@ -25,7 +25,7 @@ rem Install the required packages
 pip install -r requirements.txt
 
 rem Run the code
-python discordbot.py
+python telegrambot.py
 
 rem Deactivate the virtual environment
 call venv\Scripts\deactivate
