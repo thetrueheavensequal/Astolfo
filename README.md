@@ -48,7 +48,7 @@ API_ID: your telegram id api id (Get these by creating an app here after creatin
 
 API_HASH: your telegram id api hash
 
-SD_URL: your sd api url ( 128.0.0.1:7860 if running locally)
+SD_URL: your sd api url ( http://localhost:7860 if running locally)
 
 Automatic Pygmalion-6B KoboldAi: https://colab.research.google.com/drive/1ZvYq4GmjfsyIkcTQcrBhSFXs8vQLLMAS
 
