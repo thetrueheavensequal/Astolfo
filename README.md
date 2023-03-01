@@ -14,8 +14,12 @@ This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B wi
 
 >4. Decide if you want to run KoboldAI  and Stable Diffusion locally or with a remote server like Google colab. If you run it yourself, it can stay on forever, if you run it on Colab, it'll need restarted atleast twice a day
 
->5. Download KoboldAI https://github.com/henk717/KoboldAI, Download Automatic1111 Stable Diffusion WebUI: https://github.com/AUTOMATIC1111/stable-diffusion-webui
->5a. Start KoboldAi, get models, load them
+>5. Download KoboldAI https://github.com/henk717/KoboldAI, 
+
+>5a. Download Automatic1111 Stable Diffusion WebUI: https://github.com/AUTOMATIC1111/stable-diffusion-webui
+
+>5b. Start KoboldAi, get models, load them
+
 >6. Start automatic1111's stable diffusion webui, add the flag --api and --medvram to enable the api and help with having both models loaded on your PC.
 
 >7. Change the variables in the sample.env file then rename it to only ".env" in the same folder. This sets environment variables
