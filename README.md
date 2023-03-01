@@ -3,9 +3,8 @@ This is a Telegram bot that uses KoboldAI to host models such as Pygmalion-6B wi
 
 
 
-![Screenshot from 2023-03-01 04-28-12 (1) (1)](https://user-images.githubusercontent.com/80486540/222113587-6b7a70bf-11fa-4ca4-b08c-3da58e8d5a33.jpg)
 
-
+<img src="https://user-images.githubusercontent.com/80486540/222286737-a59d98b9-7d94-4d7c-9146-97f2b1c736a1.png" width=40% height=40%>
 
 # Instructions: 
 >1. Clone the repo.
