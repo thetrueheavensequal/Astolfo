@@ -81,6 +81,7 @@ def get_prompt(conversation_history, user, text):
         "top_p": 0.9,
         "typical": 1,
         "sampler_order": [6, 0, 1, 2, 3, 4, 5],
+        "singleline": True,
         "frmttriminc": True,
         "frmtrmblln": True
     }
@@ -171,8 +172,11 @@ conversation_history = f"{char_name}'s Persona: {data['char_persona']}\n" + \
 
 
 
-
-
+# Escape reserved characters to allow markdown formatting
+def escape_message(message):
+    reserved_chars = r'*[]()~`>#+-=|{}.!'
+    escaped_chars = [f'\\{c}' if c in reserved_chars else c for c in message]
+    return ''.join(escaped_chars)
 
 
 # Define the function to handle incoming messages
@@ -192,13 +196,22 @@ def handle_message(update, context):
         results = response.json()['results']
         text = results[0]['text']
         response_text = split_text(text)[0]
+        esc_response_text = split_text(text)[0]
 
         # Update the conversation history with the user message and bot response
         
         conversation_history += f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}\n"
 
+        # checks if acting out an action and changes * to _
+        response_text = response_text.replace("*", "_")
+
+        # escapes text
+        esc_response_text = escape_message(response_text)
+
+
+
         # Send the response back to the user
-        context.bot.send_message(chat_id=update.effective_chat.id, text=response_text)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=esc_response_text, parse_mode="MarkdownV2")
 
 # Set up the dispatcher to handle incoming messages
 dispatcher = updater.dispatcher
@@ -229,7 +242,7 @@ def draw(client, message):
         return
     msg = msgs[1]
 
-    K = message.reply_text("Please Wait 10-15 Second")
+    K = message.reply_text("searching my phone, one sec")
 
     payload = {
         "prompt": msg,
@@ -237,8 +250,8 @@ def draw(client, message):
         "batch_size": 1,
         "n_iter": 1,
         "cfg scale": 7,
-        "width": 360,
-        "height": 640,
+        "width": 360, # Feel free to change these if your GPU is not limited
+        "height": 640, # Feel free to change these if your GPU is not limited
        # "enable_hr': false,
        # "denoising_strength": 0,
        # "firstphase_width": 0,
