@@ -82,6 +82,8 @@ def get_prompt(conversation_history, user, text):
         "typical": 1,
         "sampler_order": [6, 0, 1, 2, 3, 4, 5],
         "singleline": True,
+        #"sampler_seed": 69420,   #set the seed
+        #"sampler_full_determinism": True,     #set it so the seed determines generation content
         "frmttriminc": True,
         "frmtrmblln": True
     }
@@ -136,10 +138,14 @@ num_lines_to_keep = 20
 updater = Updater(token=TELEGRAM_BOT_TOKEN, use_context=True)
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 global conversation_history
+with open('conversation_history.txt', 'a+') as file:
+    file.seek(0)
+    # Read the contents of the file
+    chathistory = file.read()
 conversation_history = f"{char_name}'s Persona: {data['char_persona']}\n" + \
                             f"World Scenario: {data['world_scenario']}\n" + \
                             f'<START>\n' + \
-                            f'f"{char_name}: {char_greeting}\n'
+                            f'f"{char_name}: {char_greeting}\n{chathistory}'
 
 # SET BOT PROFILE PIC
 
@@ -199,11 +205,16 @@ def handle_message(update, context):
         esc_response_text = split_text(text)[0]
 
         # Update the conversation history with the user message and bot response
-        
+        response_text = response_text.replace("  ", " ")        
         conversation_history += f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}\n"
+        # Append conversation to text file
+        with open("conversation_history.txt", "a") as f:
+            f.write(f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}\n")
+        
 
         # checks if acting out an action and changes * to _
         response_text = response_text.replace("*", "_")
+
 
         # escapes text
         esc_response_text = escape_message(response_text)
@@ -329,5 +340,4 @@ botSD.run()
 
 
 ###############################
-
 
