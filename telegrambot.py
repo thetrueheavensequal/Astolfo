@@ -206,10 +206,10 @@ def handle_message(update, context):
 
         # Update the conversation history with the user message and bot response
         response_text = response_text.replace("  ", " ")        
-        conversation_history += f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}\n"
+        conversation_history += f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}"
         # Append conversation to text file
         with open("conversation_history.txt", "a") as f:
-            f.write(f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}\n")
+            f.write(f"{update.message.from_user.first_name}: {user_message}\n{char_name}: {response_text}")
         
 
         # checks if acting out an action and changes * to _
@@ -340,4 +340,3 @@ botSD.run()
 
 
 ###############################
-
