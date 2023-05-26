@@ -327,12 +327,12 @@ async def start(client, message):
 
     buttons = [[
         InlineKeyboardButton("Add to your group",
-                             url="http://t.me/botname?startgroup=true"),
+                             url="http://t.me/AstolfoChatBot?startgroup=true"),
     ]]
     await message.reply_photo(
         photo=Photo,
         caption=
-        f"Hello! I'm botname Ai and I can make pictures!\n\n/draw text to image",
+        f"Heya! I'm Astolfo! An A.I ChatBot, I can also make pictures! [My Creator:@hitoriiidayo] \n\n/draw text to image",
         reply_markup=InlineKeyboardMarkup(buttons))
 
 
