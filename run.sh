@@ -17,7 +17,7 @@ fi
 
 # install required packages
 echo "Installing required packages..."
-pip install -r requirements.txt
+pip install -r requirements.txt && pip install --upgrade pip
 
 # run the python code
 echo "Starting the bot..."
